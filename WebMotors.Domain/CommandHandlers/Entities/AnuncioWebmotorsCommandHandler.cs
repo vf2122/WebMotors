@@ -1,72 +1,43 @@
 ﻿using WebMotors.Domain.Commands.Entities;
 using WebMotors.Domain.Entities;
-using WebMotors.Domain.Interfaces;
 using WebMotors.Domain.Interfaces.CommandHandler;
+using WebMotors.Domain.Interfaces.Entities;
 
 namespace WebMotors.Domain.CommandHandlers.Entities
 {
-    public class AnuncioWebmotorsCommandHandler : CommandHandler<AnuncioWebmotors>, 
+    public class AnuncioWebMotorsCommandHandler : CommandHandler<AnuncioWebmotors>, 
         ICommandHandler<CadastrarAnuncioWebMotorsCommand>, 
         ICommandHandler<AlterarAnuncioWebMotorsCommand>,
         ICommandHandler<RemoverAnuncioWebMotorsCommand>
     {
-        public AnuncioWebmotorsCommandHandler(IRepositoryBase<AnuncioWebmotors> repository) : base(repository)
+        public AnuncioWebMotorsCommandHandler(IAnuncioWebmotorsRepository repository) : base(repository)
         {
         }
 
-        public void handler(CadastrarAnuncioWebMotorsCommand command)
+        public void handle(CadastrarAnuncioWebMotorsCommand command)
         {
-            if (command.IsInvalid())
-            {
-                this.AddNotifications(command);
-                return;
-            }
-
             var anuncio = new AnuncioWebmotors(command.Marca, command.Modelo, command.Versao, command.Ano, command.Quilometragem, command.Observacao);
-
-            if (anuncio.IsInvalid())
-            {
-                this.AddNotifications(anuncio);
-                return;
-            }
 
             _repository.Add(anuncio);
         }
 
-        public void handler(AlterarAnuncioWebMotorsCommand command)
+        public void handle(AlterarAnuncioWebMotorsCommand command)
         {
-            if (command.IsInvalid())
-            {
-                this.AddNotifications(command);
-                return;
-            }
+            var anuncio = _repository.GetById(command.Id);
 
-            var anuncio = new AnuncioWebmotors(command.Marca, command.Modelo, command.Versao, command.Ano, command.Quilometragem, command.Observacao);
-
-            if (anuncio.IsInvalid())
-            {
-                this.AddNotifications(anuncio);
-                return;
-            }
+            anuncio.SetAno(command.Ano);
+            anuncio.SetMarca(command.Marca);
+            anuncio.SetModelo(command.Modelo);
+            anuncio.SetVersao(command.Versao);
+            anuncio.SetQuilometragem(command.Quilometragem);
+            anuncio.SetObservacao(command.Observacao);
 
             _repository.Update(anuncio);
         }
 
-        public void handler(RemoverAnuncioWebMotorsCommand command)
+        public void handle(RemoverAnuncioWebMotorsCommand command)
         {
-            if (command.IsInvalid())
-            {
-                this.AddNotifications(command);
-                return;
-            }
-
             var anuncio = _repository.GetById(command.Id);
-
-            if (anuncio.IsInvalid())
-            {
-                this.AddNotifications(anuncio);
-                return;
-            }
 
             _repository.Remove(anuncio);
         }

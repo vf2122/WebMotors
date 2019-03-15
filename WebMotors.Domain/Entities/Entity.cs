@@ -1,9 +1,7 @@
-﻿using prmToolkit.NotificationPattern;
-
-namespace WebMotors.Domain.Entities
+﻿namespace WebMotors.Domain.Entities
 {
-    public abstract class Entity : Notifiable
+    public abstract class Entity 
     {
-        public int Id { get; private set; }
+        public int Id { get; protected set; }
     }
 }

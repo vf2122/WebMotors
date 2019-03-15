@@ -1,6 +1,4 @@
-﻿using prmToolkit.NotificationPattern;
-
-namespace WebMotors.Domain.Commands.Entities
+﻿namespace WebMotors.Domain.Commands.Entities
 {
     public class RemoverAnuncioWebMotorsCommand : Command
     {
@@ -8,8 +6,9 @@ namespace WebMotors.Domain.Commands.Entities
 
         public RemoverAnuncioWebMotorsCommand(int Id)
         {
-            new AddNotifications<RemoverAnuncioWebMotorsCommand>(this)
-                .IfFalse(x => Id > 0);
+            this.Id = Id;
+            //new AddNotifications<RemoverAnuncioWebMotorsCommand>(this)
+            //    .IfFalse(x => Id > 0);
         }
     }
 }

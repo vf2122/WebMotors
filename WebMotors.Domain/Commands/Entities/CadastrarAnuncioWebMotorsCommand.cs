@@ -1,4 +1,4 @@
-﻿using System.Linq;
+﻿using System;
 
 namespace WebMotors.Domain.Commands.Entities
 {
@@ -20,17 +20,14 @@ namespace WebMotors.Domain.Commands.Entities
             this.Quilometragem = Quilometragem;
             this.Observacao = Observacao;
 
-            new AddNotifications<CadastrarAnuncioWebMotorsCommand>(this)
-                .IfTrue(x => x.Ano > 1900, "Digite um ano válido. Ex: 1994")
-                .IfNull(x => x.Ano)
-                .IfNull(x => x.Quilometragem)
-                .IfTrue(x => !string.IsNullOrEmpty(x.Observacao) && x.Observacao.Length < 15)
-                .IfNullOrInvalidLength(x => x.Marca, 3, 45)
-                .IfNullOrInvalidLength(x => x.Modelo, 3, 45)
-                .IfNullOrInvalidLength(x => x.Versao, 3, 45);
-
-
+            //new AddNotifications<CadastrarAnuncioWebMotorsCommand>(this)
+            //    .IfTrue(x => x.Ano > 1900, "Digite um ano válido. Ex: 1994")
+            //    .IfNull(x => x.Ano)
+            //    .IfNull(x => x.Quilometragem)
+            //    .IfTrue(x => !string.IsNullOrEmpty(x.Observacao) && x.Observacao.Length < 15)
+            //    .IfNullOrInvalidLength(x => x.Marca, 3, 45)
+            //    .IfNullOrInvalidLength(x => x.Modelo, 3, 45)
+            //    .IfNullOrInvalidLength(x => x.Versao, 3, 45);
         }
-
     }
 }

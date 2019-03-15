@@ -5,7 +5,7 @@ using WebMotors.Domain.Interfaces;
 
 namespace Infra.Data.EFM.Repositories
 {
-    public class RepositoryBase<TEntity> : IResitoryBase<TEntity> where TEntity : Entity
+    public class RepositoryBase<TEntity> : IRepositoryBase<TEntity> where TEntity : Entity
     {
         private readonly Context.Context _context;
         public RepositoryBase()
@@ -21,7 +21,7 @@ namespace Infra.Data.EFM.Repositories
 
         public IEnumerable<TEntity> GetAll()
         {
-            return _context.Set<TEntity>();
+            return _context.Set<TEntity>().ToList();
         }
 
         public TEntity GetById(int id)
@@ -37,9 +37,7 @@ namespace Infra.Data.EFM.Repositories
 
         public void Update(TEntity entity)
         {
-            var d = GetById(entity.Id);
-            d = entity;
-
+            _context.Entry(entity).State = System.Data.Entity.EntityState.Modified;
             _context.SaveChanges();
         }
     }

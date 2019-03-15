@@ -2,8 +2,8 @@
 
 namespace WebMotors.Domain.Interfaces.CommandHandler
 {
-    public interface ICommandHandler<ICommand>
+    public interface ICommandHandler<ICommand> where ICommand : Command
     {
-        void handler(ICommand command);
+        void handle(ICommand command);
     }
 }
