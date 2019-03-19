@@ -1,6 +1,8 @@
-﻿namespace WebMotors.Domain.Commands
+﻿using MediatR;
+
+namespace WebMotors.Domain.Commands
 {
-    public class Command 
+    public class Command : IRequest<bool>
     {
     }
 }

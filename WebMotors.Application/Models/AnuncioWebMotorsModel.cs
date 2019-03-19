@@ -1,7 +1,7 @@
 ﻿using System;
 using WebMotors.Domain.Entities;
 
-namespace WebMotors.Service.Api.Models
+namespace WebMotors.Application.Models
 {
     public class AnuncioWebMotorsModel
     {

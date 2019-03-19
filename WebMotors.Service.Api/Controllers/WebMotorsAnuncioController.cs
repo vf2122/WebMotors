@@ -1,55 +1,48 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using System.Web.Http;
-using WebMotors.Domain.Commands;
-using WebMotors.Domain.Interfaces.CommandHandler;
-using WebMotors.Domain.Interfaces.Entities;
-using WebMotors.Service.Api.Models;
+using WebMotors.Application.Interfaces.Entities;
+using WebMotors.Application.Models;
 
 namespace WebMotors.Service.Api.Controllers
 {
     public class WebMotorsAnuncioController : ApiController
     {
-        private readonly IAnuncioWebmotorsRepository _repo;
-        private readonly ICommandHandler<Command> _handler;
+        private readonly IAnuncioWebmotorsAppService _app;
 
-        public WebMotorsAnuncioController(
-            IAnuncioWebmotorsRepository repo,
-            ICommandHandler<Command> handler
-            )
+        public WebMotorsAnuncioController(IAnuncioWebmotorsAppService app)
         {
-            _repo = repo;
-            _handler = handler;
+            _app = app;
         }
+
 
         // GET api/values
         public IEnumerable<AnuncioWebMotorsModel> Get()
         {
-            return _repo.GetAll().Select(x => { return (AnuncioWebMotorsModel)x; }).ToList();
+            return _app.GetAll();
         }
 
         // GET api/values/5
         public AnuncioWebMotorsModel Get(int id)
         {
-            return (AnuncioWebMotorsModel)_repo.GetById(id);
+            return _app.GetById(id);
         }
 
         // POST api/values
         public void Post([FromBody]CadastrarAnuncioWebMotorsModel model)
         {
-            _handler.handle(model.ToCommand());
+            _app.Register(model);
         }
 
         // PUT api/values/5
         public void Put(int id, [FromBody]AlterarAnuncioWebMotorsModel model)
         {
-            _handler.handle(model.ToCommand());
+            _app.Update(model);
         }
 
         // DELETE api/values/5
         public void Delete(RemoverAnuncioWebMotorsModel model)
         {
-            _handler.handle(model.ToCommand());
+            _app.Remove(model);
         }
     }
 }

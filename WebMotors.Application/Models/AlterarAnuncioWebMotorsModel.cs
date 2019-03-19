@@ -1,6 +1,6 @@
 ﻿using WebMotors.Domain.Commands.Entities;
 
-namespace WebMotors.Service.Api.Models
+namespace WebMotors.Application.Models
 {
     public class AlterarAnuncioWebMotorsModel
     {

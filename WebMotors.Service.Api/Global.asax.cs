@@ -11,6 +11,12 @@ using WebMotors.Domain.Interfaces.CommandHandler;
 using WebMotors.Domain.Interfaces.Entities;
 using SimpleInjector.Integration.WebApi;
 using WebMotors.Domain.Commands;
+using WebMotors.Domain.Interfaces.Bus;
+using WebMotors.Infra.CrossCutting.Bus;
+using WebMotors.Application.Interfaces.Entities;
+using WebMotors.Application.Services;
+using MediatR;
+using MediatR.SimpleInjector;
 
 namespace WebMotors.Service.Api
 {
@@ -25,13 +31,19 @@ namespace WebMotors.Service.Api
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
 
+
             var container = new Container();
             container.Options.DefaultScopedLifestyle = new AsyncScopedLifestyle();
 
+            container.BuildMediator();
+
+
             container.Register<IAnuncioWebmotorsRepository, AnuncioWebmotorsRepository>(Lifestyle.Singleton);
-            container.Register<ICommandHandler<AlterarAnuncioWebMotorsCommand>, AnuncioWebMotorsCommandHandler>(Lifestyle.Singleton);
-            container.Register<ICommandHandler<CadastrarAnuncioWebMotorsCommand>, AnuncioWebMotorsCommandHandler>(Lifestyle.Singleton);
-            container.Register<ICommandHandler<RemoverAnuncioWebMotorsCommand>, AnuncioWebMotorsCommandHandler>(Lifestyle.Singleton);
+            container.Register<IRequestHandler<AlterarAnuncioWebMotorsCommand, bool>, AnuncioWebMotorsCommandHandler>(Lifestyle.Singleton);
+            container.Register<IRequestHandler<CadastrarAnuncioWebMotorsCommand, bool>, AnuncioWebMotorsCommandHandler>(Lifestyle.Singleton);
+            container.Register<IRequestHandler<RemoverAnuncioWebMotorsCommand, bool>, AnuncioWebMotorsCommandHandler>(Lifestyle.Singleton);
+            container.Register<IMediatorHandler, InMemoryBus>(Lifestyle.Singleton);
+            container.Register<IAnuncioWebmotorsAppService, AnuncioWebmotorsAppService>(Lifestyle.Singleton);
 
             // This is an extension method from the integration package.
             container.RegisterWebApiControllers(GlobalConfiguration.Configuration);

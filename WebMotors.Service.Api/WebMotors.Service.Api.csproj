@@ -51,6 +51,12 @@
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
+    <Reference Include="MediatR, Version=6.0.0.0, Culture=neutral, PublicKeyToken=bb9a41a5e8aaa7e2, processorArchitecture=MSIL">
+      <HintPath>..\packages\MediatR.6.0.0\lib\net461\MediatR.dll</HintPath>
+    </Reference>
+    <Reference Include="MediatR.SimpleInjector, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MediatR.SimpleInjector.6.0.0.1\lib\net461\MediatR.SimpleInjector.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Microsoft.Owin, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Owin.4.0.0\lib\net451\Microsoft.Owin.dll</HintPath>
@@ -212,10 +218,6 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\AlterarAnuncioWebMotorsModel.cs" />
-    <Compile Include="Models\CadastrarAnuncioWebMotorsModel.cs" />
-    <Compile Include="Models\RemoverAnuncioWebMotorsModel.cs" />
-    <Compile Include="Models\AnuncioWebMotorsModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -309,9 +311,17 @@
       <Project>{8934E0EF-4B8B-4807-A32B-C953E237FEAD}</Project>
       <Name>Infra.Data.EFM</Name>
     </ProjectReference>
+    <ProjectReference Include="..\WebMotors.Application\WebMotors.Application.csproj">
+      <Project>{A0A3A0FE-D394-4642-BF0C-C408E43D082A}</Project>
+      <Name>WebMotors.Application</Name>
+    </ProjectReference>
     <ProjectReference Include="..\WebMotors.Domain\WebMotors.Domain.csproj">
       <Project>{8adf7d93-29a6-48a6-89a6-ffbd0afdb42d}</Project>
       <Name>WebMotors.Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\WebMotors.Infra.CrossCutting.Bus\WebMotors.Infra.CrossCutting.Bus.csproj">
+      <Project>{D001A08A-3179-4ABC-A880-F653D35A25F2}</Project>
+      <Name>WebMotors.Infra.CrossCutting.Bus</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
