@@ -5,7 +5,7 @@ namespace Infra.Data.EFM.Context
 {
     public class Context : DbContext
     {
-        public Context() : base (@"Data Source=srvCon,6060;Initial Catalog=teste_webmotors;Integrated Security=True")
+        public Context() : base (@"Data Source=LAPTOP-236K86F0\SQLEXPRESS;Initial Catalog=teste_webmotors;Integrated Security=True")
         {
         }
 

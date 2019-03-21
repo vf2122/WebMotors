@@ -1,0 +1,19 @@
+﻿@model  IEnumerable<WebMotors.Application.Models.AnuncioWebMotorsModel>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Lista de Anuncios</h2>
+
+@foreach (WebMotors.Application.Models.AnuncioWebMotorsModel v in Model)
+{
+    <p>Id: @v.Id</p>
+    <p>Marca: @v.Marca</p>
+    <p>Modelo: @v.Modelo</p>
+    <p>Versão: @v.Versao</p>
+    <p>Quilometragem: @v.Quilometragem</p>
+    <p>Observacao: @v.Observacao</p>
+    <hr/>
+}
+
